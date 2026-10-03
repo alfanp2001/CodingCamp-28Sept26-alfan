@@ -8,6 +8,7 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com">
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -47,37 +48,50 @@
       <br>
       <span id="balance" class="text-2xl">Rp.0.00</span>
     </div>
-    <form class="flex flex-row items-center gap-x-4 max-w-2xl mx-auto p-4 ">
+    <div class="flex flex-row items-center gap-x-4 max-w-2xl mx-auto px-4 ">
       <label for="budget-input">Budget:</label>
-      <input id="budget-input" type="number" class="bg-inherit border-2 rounded-sm"></input>
-      <button id="budget-button" class="p-1 rounded-sm outline outline-2 text-sm">
+      <input id="budget-input" type="number" class="bg-inherit border-2 rounded-sm p-1" placeholder="Enter Budget">
+      <button id="budget-button" class="p-1 rounded-sm outline outline-2 text-sm" type="button">
         Set Budget
       </button>
-      <span class="field-error" id="error-budget" role="alert"></span>
-    </form>
+    </div>
+    <span class="text-center text-red-500 invisible text-sm" id="budget-error" role="alert">Budget Error</span>
     <div class="outline outline-2 rounded-sm">
       <h2 class="p-2">Add Transactions</h2>
-      <form class="flex flex-col max-w-2xl mx-auto px-4 text-sm">
+      <form id="transaction-form" class="flex flex-col gap-y-2 max-w-2xl mx-auto px-4 text-sm">
         <label for="name">Name:</label>
-        <input id="name" class="bg-inherit border-2 rounded-sm" type="text"></input>
+        <input id="name" class="bg-inherit border-2 rounded-sm p-1" type="text">
+        <span class="text-red-500 text-sm -mt-2" id="name-error" role="alert"></span>
         <label for="amount">Amount:</label>
-        <input id="amount" class="bg-inherit border-2 rounded-sm" type="number"></input>
+        <input id="amount" class="bg-inherit border-2 rounded-sm p-1" type="number" step="0.01">
+        <span class="text-red-500 text-sm -mt-2" id="amount-error" role="alert"></span>
         <label for="category">Category:</label>
-        <input id="category" type="text" list="categories" class="bg-inherit border-2 rounded-sm" />
+        <input id="category" type="text" list="categories" class="bg-inherit border-2 rounded-sm p-1" />
         <datalist id="categories">
         </datalist>
-        <button class="py-1 my-4 rounded-sm outline outline-2">
+        <span class="text-red-500 text-sm -mt-2" id="category-error" role="alert"></span>
+        <button id="add-transaction" class="py-1 my-4 rounded-sm outline outline-2" type="submit">
           Add Transaction
         </button>
       </form>
     </div>
     <div class="outline outline-2 rounded-sm p-2">
-      <h2> Transactions</h2>
-      <ul></ul>
+      <div class="flex flex-row items-center justify-between">
+        <h2 class="p-2"> Transactions</h2>
+        <div>
+          Sort:
+          <button id="sort-category" class="text-xs rounded-sm p-1 outline outline-2" type="button">By Category</button>
+          <button id="sort-amount" class="text-xs rounded-sm p-1 outline outline-2" type="button">By Amount</button>
+        </div>
+      </div>
+      <ul id="transaction-list" class="text-sm flex flex-col gap-y-2"></ul>
     </div>
     <div class="outline outline-2 rounded-sm p-2">
-      <h2>Spending by Category</h2>
-      <ul></ul>
+      <h2 class="p-2">Spending by Category</h2>
+      <div class="relative h-72 max-w-lg mx-auto">
+        <canvas id="spending-chart" role="img" aria-label="Transaction spending distribution by category"></canvas>
+      </div>
+      <p id="chart-empty" class="py-8 text-center text-sm opacity-75">No transactions to chart.</p>
     </div>
   </main>
   <script src="app.js"></script>
