@@ -1,0 +1,61 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.light-theme {
+    background-color: #f1f5f9;
+    color: #1e293b;
+    border-color: #1e293b;
+
+    input {
+        border-color: #1e293b;
+    }
+
+    button {
+        background-color: #1e293b;
+        color: #f1f5f9;
+    }
+
+    button:hover {
+        background-color: #f1f5f9;
+        color: #1e293b;
+    }
+
+    .selected {
+        background-color: #f1f5f9;
+        color: #1e293b;
+    }
+}
+
+.dark-theme {
+    background-color: #1e293b;
+    color: #f1f5f9;
+    border-color: #f1f5f9;
+
+    input {
+        border-color: #f1f5f9;
+    }
+
+    button {
+        background-color: #f1f5f9;
+        color: #1e293b;
+    }
+
+    button:hover {
+        background-color: #1e293b;
+        color: #f1f5f9;
+    }
+
+    .selected {
+        background-color: #1e293b;
+        color: #f1f5f9;
+    }
+}
